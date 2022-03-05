@@ -39,7 +39,7 @@ contract Odometer {
 
     modifier validateKilometer(string memory _vin, uint _kilometers) {
         Car storage c = cars[_vin];
-        require(c.kilometers[c.inspection_counter].kilometers <= _kilometers);
+        require(c.kilometers[c.inspection_counter-1].kilometers < _kilometers);
         _;
         
     }
@@ -66,7 +66,7 @@ contract Odometer {
         cars[_vin] = Car(_vin, _year,0, _car_model, _car_brand, _owner_address);
     }
     
-    function addKilometerCheck (string memory _vin, uint32 _kilometers ) onlyInspector validateKilometer(_vin, _kilometers) public {
+    function addKilometerCheck (string memory _vin, uint32 _kilometers ) validateKilometer(_vin, _kilometers) onlyInspector  public {
         Car storage c = cars[_vin];
         c.kilometers[c.inspection_counter] = KilometerInspection(now, _kilometers, msg.sender);
         c.inspection_counter ++;
