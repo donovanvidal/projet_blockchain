@@ -61,7 +61,7 @@ contract Odometer {
     }
 
 
-    function createNewCar(string memory _vin, uint32 _year, string memory _car_model, string memory _car_brand, address _owner_address) public {
+    function createNewCar(string memory _vin, uint32 _year, string memory _car_model, string memory _car_brand, address _owner_address) public onlyOwner{
         require(_year < now);
         cars[_vin] = Car(_vin, _year,0, _car_model, _car_brand, _owner_address);
     }
