@@ -36,6 +36,13 @@ contract("Odometer", async accounts => {
     console.log("-------------------------------------");
     console.log("");
 
+    console.log("-----------Change car001 owner-----------")
+    console.log(await instance.seeCar("001"))
+    var car = await instance.changeCarOwner("001", accounts[2]);
+    console.log(await instance.seeCar("001"))
+    console.log("-------------------------------------");
+    console.log("");
+
     console.log("-----------Declaring account 0 as inspector----------")
     console.log(await instance.createInspector(accounts[0]))
     console.log("---------------------------------------------------------------------------");
